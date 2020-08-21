@@ -17,7 +17,7 @@ URL : http://localhost:3000/
 
 get Walkin gate
 
-    http://localhost:3000/api/age/walk-in
+    http://localhost:3000/api/gate/walk-in
 
 
 ## Version Control
