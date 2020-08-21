@@ -1,29 +1,31 @@
-# competency-face-recognition
+# Recognition APP
 
-## Project setup
-```
-npm install
-```
+## Requirement
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Node.js
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## How you run this
 
-### Run your tests
-```
-npm run test
-```
+After clone this project, Copy db from "db/template" to outside (db/)
+  
+    npm install
+    node server.js
 
-### Lints and fixes files
-```
-npm run lint
-```
+URL : http://localhost:3000/
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## API list
+
+get Walkin gate
+
+    http://localhost:3000/api/age/walk-in
+
+
+## Version Control
+
+### API
+
+- V.0.1 : Deploy first API
+
+### Web
+
+- V.0.1 : Main function and design
