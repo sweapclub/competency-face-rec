@@ -15,10 +15,32 @@ router.get('/gate/walk-in', (req, res) => {
       select  a.ID as id,a.name, c.companyName,programming,electronic,mechanic,img
       from recognition as r left join authorized as a
       on r.ID = a.ID left join company as c on a.companyID = c.companyID
-      where strftime("%s",datetime('now','localtime')) - strftime("%s", timestamp_in) <= 10
+      where strftime("%s",datetime('now','localtime')) - strftime("%s", timestamp_in) <= 5
       order by timestamp_in desc
       limit 1
   `
+    )
+    .then(
+      (data) => {
+        res.send(data);
+      },
+      (err) => {
+        res.sendStatus(404);
+      }
+    );
+});
+
+router.get('/current-employee', (req, res) => {
+  res.header('Content-Type', 'application/json');
+  sql
+    .execQuery(
+      `
+      select a.ID as id,a.name,c.companyName, r.timestamp_in
+      from recognition as r left join authorized as a 
+      on r.ID = a.ID left join company as c 
+      on c.companyID = a.companyID
+      order by timestamp_in desc, a.name asc
+`
     )
     .then(
       (data) => {

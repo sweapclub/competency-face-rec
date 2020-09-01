@@ -19,13 +19,19 @@ get Walkin gate
 
     http://localhost:3000/api/age/walk-in
 
+get Current Employee in room
+
+    http://localhost:3000/api/current-employee
+
 
 ## Version Control
 
 ### API
 
 - V.0.1 : Deploy first API
+- V.0.2 : add Current Employee
 
 ### Web
 
 - V.0.1 : Main function and design
+- V.0.2 : Add Current Employee
