@@ -67,7 +67,7 @@
 
     <v-main>
       <v-container fill-height>
-        <v-row align="center" justify="center">
+        <v-row align="center" justify="center" v-if="idleFlg">
           <v-col cols="7">
             <div style="height:100%;">
               <div class="detail-box-shadow">
@@ -103,15 +103,6 @@
                     </div>
                   </v-col>
                 </v-row>
-                <!-- <div class="text-h3 ma-5">
-                  Name : <span style="color:black;">Nuttasak Munhadee</span>
-                </div>
-                <div class="text-h3 ma-5">
-                  ID : <span style="color:black;">1540-001412</span>
-                </div>
-                <div class="text-h3 ma-5">
-                  Company : <span style="color:black;">Repco</span>
-                </div> -->
               </div>
               <br />
               <div class="text-h3 ma-5">Competency</div>
@@ -164,6 +155,34 @@
             </div>
           </v-col>
         </v-row>
+        <v-card style="min-height:80%;max-height:80%; width:100%" v-else>
+          <v-card-title>
+            <div class="text-h3">
+              Current Employee
+            </div>
+          </v-card-title>
+
+          <v-card-text style="overflow-y:auto;text-align:center">
+            <div style="  display: flex;  justify-content: center;  ">
+              <table id="table-current-emp">
+                <tr>
+                  <th class="text-h4 text-left" style="width:200px;">ID</th>
+                  <th class="text-h4  text-left">Name</th>
+                  <th class="text-h4 text-left">Company</th>
+                  <th class="text-h4 text-left" style="width:240px;">
+                    Time In
+                  </th>
+                </tr>
+                <tr v-for="e in currentEmployee" :key="e.id">
+                  <td class="text-h5 text-left">{{ e.id }}</td>
+                  <td class="text-h5 text-left">{{ e.name }}</td>
+                  <td class="text-h5 text-left">{{ e.companyName }}</td>
+                  <td class="text-h5 text-center">{{ e.timestamp_in }}</td>
+                </tr>
+              </table>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-container>
     </v-main>
     <v-footer app color="white">
@@ -184,6 +203,8 @@ export default {
     objWorker: null,
     interval: null,
     origin: location.origin,
+    idleFlg: 0,
+    currentEmployee: null,
   }),
   mounted() {
     this.interval = setInterval(() => {
@@ -192,9 +213,19 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           if (data.length == 0) {
-            this.objWorker = null;
+            fetch('http://localhost:3000/api/current-employee')
+              .then((res) => res.json())
+              .then((data) => {
+                this.currentEmployee = data;
+                this.idleFlg = false;
+                this.objWorker = null;
+              });
+            console.log('none');
+
           } else {
+            console.log('got 1');
             this.objWorker = data[0];
+            this.idleFlg = true;
           }
         });
     }, 1000);
@@ -208,5 +239,18 @@ export default {
 .detail-box-shadow {
   border: thin solid rgba(0, 0, 0, 0.12);
   margin: 2px;
+}
+
+#table-current-emp {
+  border-collapse: collapse;
+  width: 85%;
+}
+#table-current-emp td,#table-current-emp  th {
+  padding: 8px;
+
+}
+
+#table-current-emp tr:nth-child(1) {
+  border-bottom: 1px solid black;
 }
 </style>
