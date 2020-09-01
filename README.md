@@ -17,7 +17,7 @@ URL : http://localhost:3000
 
 get Walkin gate
 
-    http://localhost:3000/api/age/walk-in
+    http://localhost:3000/api/gate/walk-in
 
 get Current Employee in room
 
@@ -34,4 +34,7 @@ get Current Employee in room
 ### Web
 
 - V.0.1 : Main function and design
+<<<<<<< HEAD
 - V.0.2 : Add Current Employee
+=======
+>>>>>>> 758891f1cb86b6b6c7eceafd4f8ca46a16f73f6a
