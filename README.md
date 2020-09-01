@@ -11,7 +11,7 @@ After clone this project, Copy db from "db/template" to outside (db/)
     npm install
     node server.js
 
-URL : http://localhost:3000/
+URL : http://localhost:3000
 
 ## API list
 
